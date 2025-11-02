@@ -160,25 +160,15 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == "--list":
             list_entries()
-        elif sys.argv[1] == "--id" and len(sys.argv) > 2:
-            remove_entry(entry_id=sys.argv[2])
         elif sys.argv[1] == "--help":
             print("Usage:")
-            print("  python Remove.py <week_number>       # Remove by week number")
-            print("  python Remove.py --id <entry_id>     # Remove by ID")
-            print("  python Remove.py --list              # List all entries")
-            print("  python Remove.py --help              # Show this help")
+            print("  python Remove.py                # Remove entry with week_number = 1")
+            print("  python Remove.py --list         # List all entries")
+            print("  python Remove.py --help         # Show this help")
         else:
-            try:
-                week_num = int(sys.argv[1])
-                remove_entry(week_number=week_num)
-            except ValueError:
-                print(f"✗ Invalid week number: {sys.argv[1]}")
-                print("Use --help for usage information")
+            print(f"✗ Unknown argument: {sys.argv[1]}")
+            print("Use --help for usage information")
     else:
-        print("Usage:")
-        print("  python Remove.py <week_number>       # Remove by week number")
-        print("  python Remove.py --id <entry_id>     # Remove by ID")
-        print("  python Remove.py --list              # List all entries")
-        print("  python Remove.py --help              # Show this help")
+        # Always remove entry with week_number = 1
+        remove_entry(week_number=1)
 

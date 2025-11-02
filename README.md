@@ -79,7 +79,8 @@ python Add.py
 ```
 
 **What it does:**
-- Checks if an entry with the same `week_number` already exists
+- **Always creates entries with `week_number = 1`** (hardcoded)
+- Checks if an entry with `week_number = 1` already exists
 - If entry exists:
   - Sends push notification "Entry already exist"
   - Terminates without adding the entry
@@ -89,18 +90,15 @@ python Add.py
   - Automatically updates `id` and `created_at` fields (handled by Supabase)
   - Sends push notification "Entry Created"
 
-**Note:** The date field is automatically set to today's date. If you want to use a different date, modify the `today` variable in the script.
+**Note:** The date field is automatically set to today's date. The script always uses `week_number = 1` to track your most recent entry.
 
 ### Remove.py
 Removes entries from the Supabase database and sends push notifications.
 
 **Usage:**
 ```bash
-# Remove by week number
-python Remove.py 1
-
-# Remove by ID
-python Remove.py --id abc123-def456-...
+# Remove entry with week_number = 1
+python Remove.py
 
 # List all entries
 python Remove.py --list
@@ -110,11 +108,14 @@ python Remove.py --help
 ```
 
 **What it does:**
-- Attempts to delete the specified entry from the database
+- **Always removes entries with `week_number = 1`** (hardcoded)
+- Attempts to delete the entry from the database
 - Sends push notifications based on the result:
   - **"Entry Deleted"** - if the entry was successfully deleted
-  - **"Entry not Found"** - if no entry exists with that week number or ID
+  - **"Entry not Found"** - if no entry exists with week_number = 1
   - **"Problem running Remove Script"** - if there's an error accessing the database or any other issue
+
+**Note:** The script is designed to work with `week_number = 1` to manage your most recent entry.
 
 ## Environment Variables
 

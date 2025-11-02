@@ -2,20 +2,6 @@ name: Remove Entry
 
 on:
   workflow_dispatch:
-    inputs:
-      week_number:
-        description: 'Week number to remove'
-        required: true
-        type: number
-      use_id:
-        description: 'Use ID instead of week number (leave week_number as 0)'
-        required: false
-        type: boolean
-        default: false
-      entry_id:
-        description: 'Entry ID (only used if use_id is true)'
-        required: false
-        type: string
 
 jobs:
   remove-entry:
@@ -43,11 +29,6 @@ jobs:
         echo "PUSHOVER_USER_KEY=${{ secrets.PUSHOVER_USER_KEY }}" >> .env
         echo "PUSHOVER_TOKEN=${{ secrets.PUSHOVER_TOKEN }}" >> .env
         
-    - name: Run Remove.py by week number
-      if: ${{ !inputs.use_id }}
-      run: python Remove.py ${{ inputs.week_number }}
-      
-    - name: Run Remove.py by ID
-      if: ${{ inputs.use_id }}
-      run: python Remove.py --id ${{ inputs.entry_id }}
+    - name: Run Remove.py (always removes week_number = 1)
+      run: python Remove.py
 
