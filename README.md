@@ -1,6 +1,15 @@
 # Supabase Activity Scripts
 
-Python scripts to manage workout/body measurement data in a Supabase database.
+Python scripts to manage workout/body measurement data in a Supabase database with real-time push notifications via Pushover.
+
+## Features
+
+- ✅ **Duplicate Detection**: Automatically checks for existing entries before insertion
+- 📱 **Push Notifications**: Real-time notifications for all operations via Pushover
+- 🗄️ **Supabase Integration**: Seamless database operations with Supabase
+- 📊 **Progress Tracking**: Track comprehensive body measurements and progress
+- 🔒 **Environment Variables**: Secure configuration using .env files
+- 🚀 **Easy to Use**: Simple command-line interface
 
 ## Setup
 
@@ -85,25 +94,53 @@ python Remove.py --help
 - `PUSHOVER_USER_KEY`: Your Pushover user key
 - `PUSHOVER_TOKEN`: Your Pushover application token
 
+## Push Notifications
+
+The scripts send push notifications via Pushover for the following events:
+
+### Add.py Notifications:
+- 🟢 **"Entry Created"** - Successfully added a new entry
+- 🟡 **"Entry already exist"** - Attempted to add a duplicate entry
+
+### Remove.py Notifications:
+- 🔴 **"Entry Deleted"** - Successfully deleted an entry
+- 🟠 **"Entry not Found"** - Attempted to delete a non-existent entry
+- ⚠️ **"Problem running Remove Script"** - Error occurred during execution
+
 ## Data Fields
 
 The scripts work with the following data fields:
-- week_number
-- date
-- weight
-- fat_percent
-- bmi
-- fat_weight
-- lean_weight
-- neck
-- shoulders
-- biceps
-- forearms
-- chest
-- above_navel
-- navel
-- waist
-- hips
-- thighs
-- calves
+- `week_number` - Week identifier (used for duplicate detection)
+- `date` - Date of measurement (auto-set to today)
+- `weight` - Body weight in kg
+- `fat_percent` - Body fat percentage
+- `bmi` - Body Mass Index
+- `fat_weight` - Fat weight in kg
+- `lean_weight` - Lean body weight in kg
+- `neck` - Neck circumference
+- `shoulders` - Shoulder width
+- `biceps` - Bicep circumference
+- `forearms` - Forearm circumference
+- `chest` - Chest circumference
+- `above_navel` - Measurement above navel
+- `navel` - Measurement at navel
+- `waist` - Waist circumference
+- `hips` - Hip circumference
+- `thighs` - Thigh circumference
+- `calves` - Calf circumference
+
+## Requirements
+
+- Python 3.13+
+- Supabase account with a configured database
+- Pushover account for push notifications
+- Virtual environment (recommended)
+
+## License
+
+This project is open source and available for personal use.
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
 
