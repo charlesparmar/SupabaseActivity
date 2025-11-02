@@ -11,7 +11,37 @@ Python scripts to manage workout/body measurement data in a Supabase database wi
 - 🔒 **Environment Variables**: Secure configuration using .env files
 - 🚀 **Easy to Use**: Simple command-line interface
 
+## 🚀 GitHub Actions (Trigger from Phone!)
+
+You can trigger these scripts directly from your phone using GitHub Actions workflows!
+
+### Quick Access:
+- 📱 **Add Entry**: [Run Workflow](https://github.com/charlesparmar/SupabaseActivity/actions/workflows/add-entry.yml)
+- 📱 **Remove Entry**: [Run Workflow](https://github.com/charlesparmar/SupabaseActivity/actions/workflows/remove-entry.yml)
+
+### For Phone Apps & API Details:
+See the complete guide: **[GITHUB_ACTIONS_GUIDE.md](GITHUB_ACTIONS_GUIDE.md)**
+
+Includes setup for:
+- iOS Shortcuts
+- Android HTTP Shortcuts
+- Tasker, Pushcut, and more!
+
+### GitHub Secrets Configuration:
+To use GitHub Actions, add these secrets to your repository:
+1. Go to: `Settings` → `Secrets and variables` → `Actions`
+2. Add the following secrets:
+   - `SUPABASE_API_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `SUPABASE_TABLE`
+   - `PUSHOVER_USER_KEY`
+   - `PUSHOVER_TOKEN`
+
+---
+
 ## Setup
+
+### Local Installation
 
 1. Create and activate a virtual environment:
 ```bash
