@@ -1,0 +1,53 @@
+name: Remove Entry
+
+on:
+  workflow_dispatch:
+    inputs:
+      week_number:
+        description: 'Week number to remove'
+        required: true
+        type: number
+      use_id:
+        description: 'Use ID instead of week number (leave week_number as 0)'
+        required: false
+        type: boolean
+        default: false
+      entry_id:
+        description: 'Entry ID (only used if use_id is true)'
+        required: false
+        type: string
+
+jobs:
+  remove-entry:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Create .env file
+      run: |
+        echo "SUPABASE_API_URL=${{ secrets.SUPABASE_API_URL }}" >> .env
+        echo "SUPABASE_SERVICE_ROLE_KEY=${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" >> .env
+        echo "SUPABASE_TABLE=${{ secrets.SUPABASE_TABLE }}" >> .env
+        echo "PUSHOVER_USER_KEY=${{ secrets.PUSHOVER_USER_KEY }}" >> .env
+        echo "PUSHOVER_TOKEN=${{ secrets.PUSHOVER_TOKEN }}" >> .env
+        
+    - name: Run Remove.py by week number
+      if: ${{ !inputs.use_id }}
+      run: python Remove.py ${{ inputs.week_number }}
+      
+    - name: Run Remove.py by ID
+      if: ${{ inputs.use_id }}
+      run: python Remove.py --id ${{ inputs.entry_id }}
+
